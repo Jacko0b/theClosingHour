@@ -1,8 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpupxn355irgx"]
+[gd_scene load_steps=3 format=3 uid="uid://bpupxn355irgx"]
 
 [ext_resource type="PackedScene" uid="uid://bsafgl3pjcv56" path="res://scenes/player.tscn" id="1_cky6x"]
+[ext_resource type="Texture2D" uid="uid://obk4wiy6e2q1" path="res://assets/map-test.png" id="2_5gf73"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_cky6x")]
-position = Vector2(581, 292)
+[node name="Map" type="Node2D" parent="."]
+
+[node name="MapImage" type="TextureRect" parent="Map"]
+offset_right = 953.0
+offset_bottom = 647.0
+texture = ExtResource("2_5gf73")
+expand_mode = 1
+
+[node name="Collisions" type="StaticBody2D" parent="Map"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Collisions"]
+polygon = PackedVector2Array(64, 323, 139, 323, 134, 333, 134, 347, 155, 347, 177, 324, 211, 324, 211, 335, 228, 335, 242, 324, 256, 324, 326, 288, 365, 288, 364, 224, 79, 225)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/Collisions"]
+polygon = PackedVector2Array(62, 323, 63, 425, 486, 428, 487, 381, 493, 349, 508, 349, 509, 498, 33, 497)
+
+[node name="Camera" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Camera"]
+position = Vector2(317, 360)
+zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_right = 953
+limit_bottom = 647
+editor_draw_limits = true
+
+[node name="Player" parent="Camera" instance=ExtResource("1_cky6x")]
+position = Vector2(317, 360)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Camera/Player"]
+remote_path = NodePath("../../Camera2D")

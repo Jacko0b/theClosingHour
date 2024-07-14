@@ -3,7 +3,7 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
 	[Export]
-	public int Speed { get; set; } = 400;
+	public int Speed { get; set; } = 100;
 
 	public void GetInput()
 	{
